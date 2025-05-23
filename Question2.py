@@ -25,11 +25,12 @@ pygame.mixer.music.play(-1)  # Loop forever
 pygame.mixer.music.set_volume(0.5)
 
 player_img = pygame.transform.scale(
-    pygame.image.load("player_tank.png"), (40, 70))
-enemy_img = pygame.transform.scale(
-    pygame.image.load("enemy_tank.png"), (40, 60))
+    pygame.image.load("player_tank.png"), (40, 90))
+enemy_img = pygame.transform.rotate(
+    pygame.transform.scale(
+        pygame.image.load("enemy_tank.png"), (40, 80)), 180)
 boss_img = pygame.transform.scale(
-    pygame.image.load("boss_tank.png"), (75, 120))
+    pygame.image.load("boss_tank.png"), (120, 180))
 bullet_sound = pygame.mixer.Sound("bulletshot.mp3")
 
 # Initialize OpenCV video capture for background video
@@ -128,6 +129,7 @@ def draw_hud():
     draw_text(win, f"Lives: {player.lives}", 10, 10)
     draw_text(win, f"Score: {player.score}", 10, 30)
     draw_text(win, f"Hits Taken: {player.hits_taken} / 3", 10, 50)
+    draw_text(win, f"Enemies Escaped: {enemy_escape_count} / 4", 10, 70)
 
 
 def game_over_screen():
@@ -155,7 +157,8 @@ def start_screen():
     win.fill(BLACK)
     draw_text(win, "SPACE WAR", WIDTH // 2 - 80,
               HEIGHT // 2 - 80, WHITE, BIG_FONT)
-    draw_text(win, "Press S to Start", WIDTH // 2 - 80, HEIGHT // 2 - 20)
+    draw_text(win, "Press any key to Start",
+              WIDTH // 2 - 100, HEIGHT // 2 - 20)
     draw_text(win, "Press Q to Quit", WIDTH // 2 - 80, HEIGHT // 2 + 20)
     pygame.display.update()
     waiting = True
@@ -165,29 +168,63 @@ def start_screen():
                 pygame.quit()
                 exit()
             if e.type == pygame.KEYDOWN:
-                if e.key == pygame.K_s:
-                    waiting = False
-                elif e.key == pygame.K_q:
+                if e.key == pygame.K_q:
                     pygame.quit()
                     exit()
+                else:
+                    waiting = False  # Any other key starts the game
 
 
 def win_screen():
-    win.fill(WHITE)
-    draw_text(win, "CONGRATULATIONS! YOU WON!", WIDTH //
-              2 - 200, HEIGHT // 2 - 40, GREEN, BIG_FONT)
-    draw_text(win, "Press R to Restart or Q to Quit",
-              WIDTH // 2 - 150, HEIGHT // 2 + 20, BLACK)
-    pygame.display.update()
-    wait = True
-    while wait:
+    victory_sound = pygame.mixer.Sound("victory.mp3")
+    victory_sound.play()
+
+    win_timer = pygame.time.get_ticks()
+    flash = True
+
+    sparkles = [pygame.Rect(random.randint(0, WIDTH), random.randint(
+        0, HEIGHT), 2, 2) for _ in range(100)]
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+            ret, frame = cap.read()
+
+        frame = cv2.resize(frame, (WIDTH, HEIGHT))
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        background_surface = pygame.surfarray.make_surface(np.rot90(frame))
+        win.blit(background_surface, (0, 0))
+
+        for sparkle in sparkles:
+            pygame.draw.rect(win, (255, 255, 255), sparkle)
+            sparkle.y += 1
+            if sparkle.y > HEIGHT:
+                sparkle.y = 0
+                sparkle.x = random.randint(0, WIDTH)
+
+        if flash:
+            draw_text(win, "CONGRATULATIONS!", WIDTH // 2 -
+                      200, HEIGHT // 2 - 60, GREEN, BIG_FONT)
+
+        draw_text(win, "You defeated the boss!", WIDTH //
+                  2 - 140, HEIGHT // 2 - 10, WHITE, FONT)
+        draw_text(win, "Press R to Restart or Q to Quit",
+                  WIDTH // 2 - 150, HEIGHT // 2 + 30, WHITE)
+
+        if pygame.time.get_ticks() - win_timer > 500:
+            flash = not flash
+            win_timer = pygame.time.get_ticks()
+
+        pygame.display.update()
+
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 pygame.quit()
                 exit()
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_r:
-                    wait = False
+                    return
                 elif e.key == pygame.K_q:
                     pygame.quit()
                     exit()
@@ -278,7 +315,7 @@ while run:
             enemy_escape_count += 1
             enemy.respawn()
 
-    if enemy_escape_count >= 10:
+    if enemy_escape_count >= 4:
         game_over_screen()
         player = Player()
         level = 1
