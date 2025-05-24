@@ -2,6 +2,7 @@ import pygame
 import random
 import cv2
 import numpy as np
+import os
 
 pygame.init()
 WIDTH, HEIGHT = 960, 540
@@ -19,22 +20,41 @@ FONT = pygame.font.SysFont(None, 30)
 BIG_FONT = pygame.font.SysFont(None, 50)
 clock = pygame.time.Clock()
 
+BASE_PATH = "Input"
+
+
 # Load and play background music
-pygame.mixer.music.load("space-cloud-333647.mp3")
+#pygame.mixer.music.load("space.mp3")
+pygame.mixer.music.load(os.path.join(BASE_PATH, "space.mp3"))
+
 pygame.mixer.music.play(-1)  # Loop forever
 pygame.mixer.music.set_volume(0.5)
 
-player_img = pygame.transform.scale(
+"""player_img = pygame.transform.scale(
     pygame.image.load("player_tank.png"), (40, 90))
 enemy_img = pygame.transform.rotate(
     pygame.transform.scale(
         pygame.image.load("enemy_tank.png"), (40, 80)), 180)
 boss_img = pygame.transform.scale(
-    pygame.image.load("boss_tank.png"), (120, 180))
-bullet_sound = pygame.mixer.Sound("bulletshot.mp3")
+    pygame.image.load("boss_tank.png"), (120, 180))"""
+
+player_img = pygame.transform.scale(
+    pygame.image.load(os.path.join(BASE_PATH, "player_tank.png")), (40, 90))
+enemy_img = pygame.transform.rotate(
+    pygame.transform.scale(pygame.image.load(os.path.join(BASE_PATH, "enemy_tank.png")), (40, 80)), 180)
+boss_img = pygame.transform.scale(
+    pygame.image.load(os.path.join(BASE_PATH, "boss_tank.png")), (120, 180))
+
+# Load sound effect for shooting
+
+#bullet_sound = pygame.mixer.Sound("bulletshot.mp3")
+bullet_sound = pygame.mixer.Sound(os.path.join(BASE_PATH, "bulletshot.mp3"))  # Use your preferred bullet sound here
 
 # Initialize OpenCV video capture for background video
-cap = cv2.VideoCapture("backvd.mp4")
+#cap = cv2.VideoCapture("backvd.mp4")
+cap = cv2.VideoCapture(os.path.join(BASE_PATH, "backvd.mp4"))
+
+
 
 
 class Projectile(pygame.sprite.Sprite):
@@ -176,8 +196,12 @@ def start_screen():
 
 
 def win_screen():
-    victory_sound = pygame.mixer.Sound("victory.mp3")
+    victory_sound = pygame.mixer.Sound(os.path.join(BASE_PATH, "victory.mp3"))
     victory_sound.play()
+
+
+    #victory_sound = pygame.mixer.Sound("victory.mp3")
+
 
     win_timer = pygame.time.get_ticks()
     flash = True
