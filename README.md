@@ -13,7 +13,6 @@ git clone https://github.com/pramishakc3/HIT137_Group_Assignment_3.git
 cd HIT137_Group_Assignment_3
 2. Set Up a Virtual Environment (Recommended)
 bash
-Copy code
 python -m venv venv
 # On Windows:
 .\venv\Scripts\activate
