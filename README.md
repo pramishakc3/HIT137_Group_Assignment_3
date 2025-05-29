@@ -1,110 +1,176 @@
-Project: HIT137 Group Assignment 3
-This repository contains two distinct applications developed as part of HIT137 Group Assignment 3:
+HIT137 Group Assignment 3
+This repository contains two separate Python applications developed for HIT137 Group Assignment 3:
 
-Image Editor App (Question 1): A desktop application for basic image manipulation.
-Space Battle Game (Question 2): A simple arcade-style game featuring a player, enemies, and level progression.
+Image Editor App (Question 1): A desktop tool for basic image manipulation.
+
+Space Battle Game (Question 2): A simple arcade shooter featuring player controls, enemy waves, and level progression.
+
 Installation
-To run these applications, you'll need Python installed on your system along with several libraries.
-
 1. Clone the Repository
-First, clone this repository to your local machine:
-
-Bash
-
+bash
+Copy code
 git clone https://github.com/pramishakc3/HIT137_Group_Assignment_3.git
 cd HIT137_Group_Assignment_3
-2. Install Dependencies
-It's highly recommended to use a virtual environment to manage dependencies.
-
-a. Create and Activate a Virtual Environment (Recommended):
-
-Bash
-
+2. Set Up a Virtual Environment (Recommended)
+bash
+Copy code
 python -m venv venv
 # On Windows:
 .\venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
-b. Install Required Libraries:
+3. Install Dependencies
+Create a requirements.txt file in the root of your project with the following:
 
-You'll need pygame, opencv-python, Pillow (PIL), and numpy. While your code implies some of these, let's create a requirements.txt file for a smooth installation.
-
-First, create a file named requirements.txt in the root of your project directory with the following content:
-
+nginx
+Copy code
 pygame
 opencv-python
 Pillow
 numpy
-Then, install them using pip:
+Then run:
 
-Bash
-
+bash
+Copy code
 pip install -r requirements.txt
 
+
 Question 1: Image Editor App
-This application provides a graphical user interface (GUI) for basic image editing functionalities.
+A GUI-based image editor for basic editing tasks.
 
 How to Run
-Navigate to the project root and run the Python script for Question 1:
-
-Bash
-
+bash
+Copy code
 python q1_image_editor.py
+<<<<<<< HEAD
+Features
+Load & Save Images via file dialogs
 
-Functional Requirements Implemented
-Load Image: Users can load an image from their local file system using a file dialog.
-Save Image: Users can save the currently displayed (and edited) image to a chosen location.
-Grayscale Conversion: Transform the loaded image to a grayscale version.
-Apply Blur: Apply a Gaussian blur filter to the image.
-Rotate 90°: Rotate the image clockwise by 90 degrees.
-Crop Image:
-Users can select a region on the left canvas by clicking and dragging.
-Clicking the "Crop" button will apply this selection to the image, displaying the cropped result on the right canvas.
-Resize Slider: A slider allows users to resize the image displayed on the right canvas by a percentage.
-Undo/Redo Functionality:
-Undo (Ctrl+Z): Reverts the last image modification, allowing users to go back through their edit history.
-Redo (Ctrl+Y): Reapplies a previously undone modification.
-Keyboard Shortcuts:
-Ctrl+S: Save Image
+Grayscale Conversion
+
+Gaussian Blur
+
+Rotate 90° (Clockwise)
+
+Crop Tool
+
+Select an area on the left canvas
+
+Click "Crop" to show result on right canvas
+
+Resize via a slider (percentage-based)
+
+Undo/Redo
+=======
+>>>>>>> f96435dfdb14a42a3df62d3935a4e9ccc07058bf
+
 Ctrl+Z: Undo
+
 Ctrl+Y: Redo
-Ctrl+R: Rotate 90°
-Dual Canvas Display: The application uses two canvases: one for the original image (or the working copy being edited) and another for showing the cropped/resized output.
+
+Keyboard Shortcuts
+
+Ctrl+S: Save
+
+Ctrl+R: Rotate
+
+Dual Canvas for original vs. modified image
 
 
 Question 2: Space Battle Game
-This is an arcade-style shooter game where the player controls a plane to defeat incoming enemies and a boss.
+An arcade-style shooter with enemies, collectibles, levels, and a boss fight.
 
 How to Run
-Ensure you have the Input folder in the same directory as your game script. This folder should contain:
+Ensure the Input folder is in the same directory as your game script, containing:
 
-space.mp3 (background music)
-player_plane.png
-enemy_plane.png
-boss_plane.png
-bulletshot.mp3
-victory.mp3
-collect.mp3
-levelup.mp3
+space.mp3, player_plane.png, enemy_plane.png, boss_plane.png
+
+bulletshot.mp3, victory.mp3, collect.mp3, levelup.mp3
+
 backvd.mp4 (background video)
-Navigate to the project root and run the Python script for Question 2:
 
-Bash
+Then run:
 
+bash
+Copy code
 python q2_space_battle.py
+<<<<<<< HEAD
+Game Features
+🎮 Player Controls
+Move: A/D or Left/Right arrows
+=======
+>>>>>>> f96435dfdb14a42a3df62d3935a4e9ccc07058bf
 
-Functional Requirements Implemented
+Jump: W or Up arrow
 
-Player Control:
-Movement (WASD / Arrow Keys): The player can move left and right using the A/D keys or Left/Right arrow keys.
-Jump (W / Up Arrow): The player can jump, with gravity affecting their vertical movement.
-Shoot (Spacebar): The player can fire projectiles.
-Enemies:
-Regular Enemies: Enemies spawn from the top of the screen and move downwards.
-Boss Enemy: A more powerful boss enemy appears in Level 3.
-Enemy Projectiles: Enemies shoot their own bullets towards the player.
-Health Bars: Both regular enemies and the boss have health bars displayed above them.
+Shoot: Spacebar
+
+Enemies
+Regular enemies fall from the top
+
+Boss enemy appears at Level 3
+
+Enemies can shoot bullets
+
+Game Logic
 Collision Detection:
+<<<<<<< HEAD
+
+Bullets vs. enemies
+
+Enemy bullets vs. player
+
+Bullet-on-bullet collision
+
+Collectibles
+
+Health & Lives:
+
+Player health bar and lives counter
+
+Enemies and boss have visible health bars
+
+Scoring System
+
+Escape Count for enemies going off-screen
+
+Game States
+Start screen with instructions
+
+Level complete transitions
+
+Game over screen
+
+Victory screen (with looping video)
+
+Level Progression
+Level 1: 5 enemies
+
+Level 2: 7 enemies
+
+Level 3: Boss battle
+
+Current level shown on HUD
+
+Collectibles
+Health Boost: Heals damage
+
+Extra Life
+
+Score Boost
+
+Audio & Visuals
+Looping video as background (via OpenCV)
+
+Background music
+
+Sound effects for bullets, pickups, level transitions, etc.
+
+Notes
+Replace script names (q1_image_editor.py, q2_space_battle.py) if you rename them.
+
+All asset files must be placed inside the Input folder.
+=======
 Player vs. Enemy Bullets: Player takes damage when hit by enemy bullets.
 Player Bullets vs. Enemies: Player bullets deal damage to enemies.
 Bullet-on-Bullet Collision: Player and enemy bullets can cancel each other out upon collision.
@@ -135,3 +201,4 @@ Dynamic Background: Utilizes a looping video as the game's background using Open
 Sound Effects: Includes sounds for bullet shots, collecting items, victory, and level ups.
 Background Music: Looping music plays throughout the game.
 Remember to replace the placeholder names for your Python files (q1_image_editor.py, q2_space_battle.py) if you decide to rename them. Also, make sure all the image, video, and audio files are correctly placed in the Input folder within your repository.
+>>>>>>> f96435dfdb14a42a3df62d3935a4e9ccc07058bf
