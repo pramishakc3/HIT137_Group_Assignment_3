@@ -50,7 +50,6 @@ Navigate to the project root and run the Python script for Question 1:
 Bash
 
 python q1_image_editor.py
-(Note: You might want to rename your this is question no 1 file to something like q1_image_editor.py to be more descriptive and easier to run.)
 
 Functional Requirements Implemented
 Load Image: Users can load an image from their local file system using a file dialog.
@@ -93,7 +92,6 @@ Navigate to the project root and run the Python script for Question 2:
 Bash
 
 python q2_space_battle.py
-(Note: You might want to rename your this is question no 2 file to something like q2_space_battle.py for clarity.)
 
 Functional Requirements Implemented
 
