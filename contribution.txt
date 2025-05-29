@@ -1,0 +1,29 @@
+HIT137 - Assignment 3 (Group Project)
+
+Group Members and Contributions:
+
+1. Pramisha K C – S388359
+   - Set up the GitHub repository and added all team members
+   - Worked on Question 2 (Pygame 2D Game)
+     - Designed Level 3 and implemented collectibles
+     - Assisted with overall game testing and tuning
+
+2. Bikash Bhandari – S390180
+   - Worked on Question 2 (Pygame 2D Game)
+     - Developed Player class and game mechanics (run, jump, shoot)
+     - Helped implement scoring system and health/lives tracking
+
+3. Ma Johanna Castillo – S392284
+   - Worked on Question 1 (Tkinter + OpenCV Application)
+     - Developed image loading, displaying, and save image features
+     - Designed GUI layout for the desktop application
+
+4. Sabin Pokhrel – S387230
+   - Worked on Question 1 (Tkinter + OpenCV Application)
+     - Implemented image cropping with mouse interaction
+     - Developed real-time feedback and image resizing functionality
+
+All group members:
+- Attended group discussions and meetings
+- Reviewed each other's code and supported testing
+- Regularly committed their work to the GitHub repository
